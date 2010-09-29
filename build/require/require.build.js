@@ -16,6 +16,17 @@
             includeRequire: true
         },
         {
+            name: "stub-require",
+            includeRequire: true,
+            override: {
+                pragmas: {
+                    stubby: true,
+                    requireExcludeModify: true,
+                    requireExcludePlugin: true
+                }
+            }
+        },
+        {
             name: "nomodifypluginspage-require",
             includeRequire: true,
             override: {

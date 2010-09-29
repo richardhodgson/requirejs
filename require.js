@@ -17,9 +17,11 @@ var require;
             empty = {}, s,
             i, defContextName = "_", contextLoads = [],
             scripts, script, rePkg, src, m, dataMain, cfg = {}, setReadyState,
+            //>>excludeStart("stubby", pragmas.stubby);
             readyRegExp = /^(complete|loaded)$/,
             commentRegExp = /(\/\*([\s\S]*?)\*\/|\/\/(.*)$)/mg,
             cjsRequireRegExp = /require\(["']([\w-_\.\/]+)["']\)/g,
+            //>>excludeEnd("stubby");
             main,
             isBrowser = !!(typeof window !== "undefined" && navigator && document),
             isWebWorker = !isBrowser && typeof importScripts !== "undefined",
@@ -32,6 +34,7 @@ var require;
         return ostring.call(it) === "[object Function]";
     }
 
+    //>>excludeStart("stubby", pragmas.stubby);
     //Check for an existing version of require. If so, then exit out. Only allow
     //one version of require to be active in a page. However, allow for a require
     //config object, just exit quickly if require is an actual function.
@@ -43,7 +46,8 @@ var require;
             cfg = require;
         }
     }
-    
+    //>>excludeEnd("stubby");
+
     //>>excludeStart("requireExcludePlugin", pragmas.requireExcludePlugin);
     /**
      * Calls a method on a plugin. The obj object should have two property,
@@ -102,6 +106,7 @@ var require;
                 }
             }
 
+            //>>excludeStart("stubby", pragmas.stubby);
             //Skip the resume if current context is in priority wait.
             if (s.contexts[s.ctxName].config.priorityWait) {
                 return;
@@ -112,6 +117,7 @@ var require;
                     req.checkDeps.apply(req, args);
                 }
             }
+            //>>excludeEnd("stubby");
 
             req.checkLoaded(s.ctxName);
         }
@@ -204,6 +210,7 @@ var require;
             deps = [];
         }
 
+        //>>excludeStart("stubby", pragmas.stubby);
         //If no name, and callback is a function, then figure out if it a
         //CommonJS thing with dependencies.
         if (!name && !deps.length && req.isFunction(callback)) {
@@ -241,6 +248,7 @@ var require;
 
             name = node.getAttribute("data-requiremodule");
         }
+        //>>excludeEnd("stubby");
 
         //Always save off evaluating the def call until the script onload handler.
         //This allows multiple modules to be in a file without prematurely
@@ -284,6 +292,7 @@ var require;
             }
         }
 
+        //>>excludeStart("stubby", pragmas.stubby);
         if (contextName !== s.ctxName) {
             //If nothing is waiting on being loaded in the current context,
             //then switch s.ctxName to current contextName.
@@ -303,6 +312,7 @@ var require;
                 s.ctxName = contextName;
             }
         }
+        //>>excludeEnd("stubby");
 
         if (!context) {
             newContext = {
@@ -684,10 +694,14 @@ var require;
         resume(context);
     };
 
+    //>>excludeStart("stubby", pragmas.stubby);
     /**
      * Legacy function, remove at some point
      */
     req.pause = req.resume = function () {};
+    //>>excludeEnd("stubby");
+
+    //>>excludeStart("stubby", pragmas.stubby);
 
     /**
      * Trace down the dependencies to see if they are loaded. If not, trigger
@@ -738,6 +752,7 @@ var require;
             }
         }
     };
+    //>>excludeEnd("stubby");
 
     //>>excludeStart("requireExcludeModify", pragmas.requireExcludeModify);
     /**
@@ -852,6 +867,7 @@ var require;
         return ret;
     };
 
+    //>>excludeStart("stubby", pragmas.stubby);
     /**
      * Makes the request to load a module. May be an async load depending on
      * the environment and the circumstance of the load call. Override this
@@ -886,6 +902,7 @@ var require;
             }
         }
     };
+    //>>excludeEnd("stubby");
 
     req.jsExtRegExp = /\.js$/;
 
@@ -1043,6 +1060,7 @@ var require;
             return;
         }
 
+        //>>excludeStart("stubby", pragmas.stubby);
         //Determine if priority loading is done. If so clear the priority. If
         //not, then do not check
         if (context.config.priorityWait) {
@@ -1062,6 +1080,7 @@ var require;
                 return;
             }
         }
+        //>>excludeEnd("stubby");
 
         //Signal that checkLoaded is being require, so other calls that could be triggered
         //by calling a waiting callback that then calls require and then this function
@@ -1074,6 +1093,7 @@ var require;
         waiting = context.waiting;
         loaded = context.loaded;
 
+        //>>excludeStart("stubby", pragmas.stubby);
         //See if anything is still in flight.
         for (prop in loaded) {
             if (!(prop in empty)) {
@@ -1117,6 +1137,7 @@ var require;
             }
             return;
         }
+        //>>excludeEnd("stubby");
 
         //Order the dependencies. Also clean up state because the evaluation
         //of modules might create new loading tasks, so need to reset.
@@ -1373,6 +1394,7 @@ var require;
     };
     //>>excludeEnd("requireExcludeModify");
 
+    //>>excludeStart("stubby", pragmas.stubby);
     /**
      * callback for script loads, used to check status of loading.
      *
@@ -1484,6 +1506,7 @@ var require;
         }
         return null;
     };
+    //>>excludeEnd("stubby");
 
     //Determine what baseUrl should be if not already defined via a require config object
     s.baseUrl = cfg.baseUrl;
