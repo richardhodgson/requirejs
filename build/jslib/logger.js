@@ -40,6 +40,10 @@ var logger = {
 	},
 
         _sysPrint: function(message){
-            print(message);
+            if (isNode) {
+                require("sys").puts(message);
+            } else {
+                print(message);
+            }
         }
 }

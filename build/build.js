@@ -26,6 +26,26 @@
 "use strict";
 var require;
 
+var isNode = false, load, fs, sys, output;
+
+if (typeof Packages === "undefined") {
+    isNode = true;
+    fs = require("fs");
+    sys = require("sys");
+
+    load = function (path) {
+        process.compile(fs.readFileSync(path) + '', path);
+    };
+    
+    output = function (value) {
+        sys.puts(value);
+    }
+} else {
+    output = function (value) {
+        print(value);
+    }
+}
+
 (function (args) {
     var requireBuildPath = args[0];
     if (requireBuildPath.charAt(requireBuildPath.length - 1) !== "/") {
@@ -34,4 +54,4 @@ var require;
     load(requireBuildPath + "jslib/build.js");
     build(args);
 
-}(Array.prototype.slice.call(arguments)));
+}(isNode ? process.argv.slice(2) : Array.prototype.slice.call(arguments)));

@@ -13,6 +13,13 @@
 
 var build, buildBaseConfig;
 (function () {
+    var output;
+    if (typeof Packages === "undefined") {
+        output = function (value) {
+            require("sys").puts(value);
+        };
+    }
+
     buildBaseConfig = {
             requireBuildPath: "../",
             appDir: "",
@@ -32,7 +39,7 @@ var build, buildBaseConfig;
             modules, module, moduleName, builtModule, srcPath;
     
         if (!args || args.length < 2) {
-            print("java -jar path/to/js.jar build.js directory/containing/build.js/ build.js\n" +
+            output("java -jar path/to/js.jar build.js directory/containing/build.js/ build.js\n" +
                   "where build.js is the name of the build file (see example.build.js for hints on how to make a build file.");
             quit();
         }
@@ -240,7 +247,7 @@ var build, buildBaseConfig;
 
         //Print out what was built into which layers.
         if (buildFileContents) {
-            print(buildFileContents);
+            output(buildFileContents);
         }
         
     };
