@@ -323,7 +323,7 @@ var requirejs, require, define;
                     url = urlMap[normalizedName];
                     if (!url) {
                         //Calculate url for the module, if it has a name.
-                        url = context.nameToUrl(normalizedName, null, parentModuleMap);
+                        url = context.nameToUrl(name, null, parentModuleMap);
 
                         //Store the URL mapping for later.
                         urlMap[normalizedName] = url;
